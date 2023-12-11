@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'test',
@@ -63,6 +65,42 @@ const deleteUser = (request, response) => {
     response.status(200).send(`User deleted with ID: ${id}`)
   })
 }
+
+
+// Function to apply a migration
+async function applyMigration(filename) {
+    const client = await pool.connect();
+    try {
+        const sql = fs.readFileSync(path.join(__dirname, '/migrations/' + filename), 'utf8');
+        await client.query(sql); // Execute the migration script
+        // await client.query(fs.readFileSync(path.join(__dirname, 'migrations-init.sql'), 'utf8'));
+        await client.query("INSERT INTO migrations (name) VALUES ($1)", [filename]); // Record the migration
+        console.log(`Applied migration: ${filename}`);
+    } catch (err) {
+        console.error(`Error applying migration ${filename}:`, err);
+    } finally {
+        client.release();
+    }
+}
+
+// Main script
+async function main() {
+    const migrationFiles = ['001_create_users_table.sql']; // List of migration files
+
+    for (const file of migrationFiles) {
+        await applyMigration(file);
+    }
+
+    await pool.end();
+}
+
+main();
+
+
+
+
+
+
 
 module.exports = {
   getUsers,
