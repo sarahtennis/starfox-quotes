@@ -3,13 +3,13 @@ const { DbPool } = require('../pool');
 const getAllCharacters = (request, response) => {
   const query  = `
     SELECT
-      character_id,
+      c.id as id,
       name,
       content,
       mime_type
     FROM
-      characters
-    INNER JOIN images ON images.image_id = characters.image_id;
+      images
+    INNER JOIN characters c ON images.character_id = c.id;
   `;
   DbPool.query(query, (error, results) => {
     if (error) {
@@ -22,7 +22,7 @@ const getAllCharacters = (request, response) => {
 const getCharacterById = (request, response) => {
   const id = parseInt(request.params.id)
 
-  DbPool.query('SELECT * FROM characters WHERE character_id = $1', [id], (error, results) => {
+  DbPool.query('SELECT * FROM characters WHERE id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
