@@ -19,10 +19,10 @@ const getAllCharacters = (request, response) => {
   })
 };
 
-const getUserById = (request, response) => {
+const getCharacterById = (request, response) => {
   const id = parseInt(request.params.id)
 
-  DbPool.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
+  DbPool.query('SELECT * FROM characters WHERE character_id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
@@ -69,5 +69,6 @@ const deleteUser = (request, response) => {
 }
 
 module.exports = {
-  getAllCharacters
+  getAllCharacters,
+  getCharacterById
 }

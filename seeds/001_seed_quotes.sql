@@ -1,0 +1,1 @@
+INSERT INTO quotes (quote_id, content) VALUES (1, 'Woah! Can you make it?');
