@@ -7,6 +7,10 @@ router.get('/', async (req, res) => {
   queries.getAllCharacters(req, res);
 });
 
+router.get('/:id', async (req, res) => {
+  queries.getCharacterById(req, res);
+});
+
 module.exports = {
   router
 };
