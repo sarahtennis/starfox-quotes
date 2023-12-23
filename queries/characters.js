@@ -1,4 +1,4 @@
-const { DbPool } = require('../pool');
+const { DbPool } = require('../db/pool');
 
 const getAllCharacters = (request, response) => {
   const query  = `

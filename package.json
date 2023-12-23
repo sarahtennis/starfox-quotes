@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "node migrate.js"
+    "build": "sudo docker build -t starfox-quotes .",
+    "start": "sudo docker run --name starfox-quotes-api -p 3000:3000 -d --restart always starfox-quotes",
+    "migrate": "node ./db/migrate.js",
+    "seed": "node ./db/seed.js"
   },
   "keywords": [],
   "author": "",

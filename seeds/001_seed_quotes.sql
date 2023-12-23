@@ -1,5 +1,3 @@
-TRUNCATE quotes;
-
 -- Slippy
 INSERT INTO quotes (content) VALUES ('Woah! Can you make it?');
 INSERT INTO quotes (content) VALUES ('Escaping? I don''t think so!');
