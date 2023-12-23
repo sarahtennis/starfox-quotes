@@ -1,7 +1,7 @@
 
-const { getSortedFiles } = require('./fileHelper.js');
-const { queryFile } = require('./queryHelper.js');
-const { DbPool } = require('./pool.js');
+import { getSortedFiles } from "./fileHelper";
+import { queryFile } from "./queryHelper";
+import { DbPool } from './pool';
 
 // Main script
 async function main() {

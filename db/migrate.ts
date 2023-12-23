@@ -1,7 +1,7 @@
-const path = require('path');
-const { DbPool } = require('./pool');
-const { queryStr, executeMigration } = require('./queryHelper.js');
-const { getSortedFiles } = require('./fileHelper.js');
+import path from 'path';
+import { DbPool } from './pool';
+import { queryStr, executeMigration } from './queryHelper';
+import { getSortedFiles  } from './fileHelper';
 
 async function main() {
     const client = DbPool;
@@ -10,7 +10,7 @@ async function main() {
     let unmigrated;
     try {
         const alreadyMigrated = await queryStr('SELECT name FROM migrations;', client);
-        const alreadyMigratedArr = alreadyMigrated.rows.map(row => row.name);
+        const alreadyMigratedArr = alreadyMigrated.rows.map((row: any) => row.name);
         unmigrated = migrationFiles.filter(filePath => {
             const fileName = path.parse(filePath).base;
             return !alreadyMigratedArr.includes(fileName);
