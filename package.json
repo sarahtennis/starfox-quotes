@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && sudo docker build -t starfox-quotes .",
-    "start": "sudo docker run --name starfox-quotes-api -p 3000:3000 -d --restart always starfox-quotes",
+    "build": "tsc && docker buildx build -t starfox-quotes-api .",
+    "start": "docker run --name starfox-quotes-container -e USER=$USER -e HOST=$HOST -e DATABASE=$DATABASE -e PASSWORD=$PASSWORD -e PORT=$PORT -p 3000:3000 starfox-quotes-api",
     "migrate": "node ./db/migrate.js",
     "seed": "node ./db/seed.js",
     "lint": "eslint ."

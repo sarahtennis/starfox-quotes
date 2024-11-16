@@ -1,14 +1,15 @@
 import path from 'path';
-import { DbPool } from './pool';
 import { queryStr, executeMigration } from './queryHelper';
 import { getSortedFiles  } from './fileHelper';
+import { CONFIG } from '../services/poolService';
+import { Client } from 'pg';
 
 async function main() {
-    const client = DbPool;
-    const migrationFiles = await getSortedFiles('../migrations');
-
+    const client = new Client(CONFIG);
     let unmigrated;
+    const migrationFiles = await getSortedFiles('../migrations');
     try {
+        await client.connect();
         const alreadyMigrated = await queryStr('SELECT name FROM migrations;', client);
         const alreadyMigratedArr = alreadyMigrated.rows.map((row: any) => row.name);
         unmigrated = migrationFiles.filter(filePath => {
@@ -27,7 +28,7 @@ async function main() {
         console.log(`Applied migration for file: ${filePath}`);
     }
 
-    client.end();
+    await client.end();
 }
 
 main();

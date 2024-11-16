@@ -1,12 +1,10 @@
 import fs from 'fs';
 import path from 'path';
+import { Client } from 'pg';
 
-export function queryStr(sql: any, client: any) {
-  try {
-    return client.query(sql);
-  } catch (err) {
-    console.error(`Error executing query ${sql}:`, err);
-  }
+export async function queryStr(sql: string, client: Client) {
+  const result = await client.query(sql);
+  return result;
 }
 
 export function queryFile(filepath: string, client: any) {

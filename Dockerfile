@@ -4,6 +4,12 @@ USER node
 RUN mkdir -p /home/node/app
 WORKDIR /home/node
 
+ENV USER=$USER
+ENV HOST=$HOST
+ENV DATABASE=$DATABASE
+ENV PASSWORD=$PASSWORD
+ENV PORT=$PORT
+
 COPY --chown=node:node package*.json ./
 RUN npm install
 
