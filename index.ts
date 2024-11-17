@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import Service from './services/serviceInterface';
-import { AppRouter } from './routes/index';
+import { AppRouter } from './router/index';
 import PoolService from './services/poolService';
 
 const services: Service[] = [];
