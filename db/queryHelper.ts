@@ -1,15 +1,13 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { Client } from 'pg';
 
-function queryStr(sql, client) {
-  try {
-    return client.query(sql);
-  } catch (err) {
-    console.error(`Error executing query ${sql}:`, err);
-  }
+export async function queryStr(sql: string, client: Client) {
+  const result = await client.query(sql);
+  return result;
 }
 
-function queryFile(filepath, client) {
+export function queryFile(filepath: string, client: any) {
   try {
     const sql = fs.readFileSync(path.resolve(__dirname, filepath), 'utf-8');
     return queryStr(sql, client); 
@@ -18,7 +16,7 @@ function queryFile(filepath, client) {
   }
 }
 
-async function executeMigration(filepath, client) {
+export async function executeMigration(filepath: string, client: any) {
   try {
     await queryFile(filepath, client);
     const fileName = path.parse(filepath).base;
@@ -27,10 +25,3 @@ async function executeMigration(filepath, client) {
     console.error(`Error applying migration at ${filepath}:`, err);
   }
 }
-
-
-module.exports = {
-  executeMigration,
-  queryFile,
-  queryStr
-};

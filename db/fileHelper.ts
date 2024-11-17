@@ -1,7 +1,7 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-function getSortedFiles(filepath) {
+export function getSortedFiles(filepath: string) {
   const files = fs.readdirSync(path.resolve(__dirname, filepath));
   files.sort((a, b) => {
       const fileNumA = Number(a.split('_')[0]);
@@ -10,7 +10,3 @@ function getSortedFiles(filepath) {
   });
   return files.map(file => `${filepath}/${file}`);
 }
-
-module.exports = {
-  getSortedFiles
-};
