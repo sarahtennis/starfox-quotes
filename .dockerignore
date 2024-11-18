@@ -3,3 +3,4 @@ migrations
 seeds
 .gitignore
 .env
+.DS_Store

@@ -2,3 +2,4 @@ node_modules
 dist
 doc
 .env
+.DS_Store
