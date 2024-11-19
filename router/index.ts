@@ -1,6 +1,6 @@
 import { Express } from "express";
 
-import CharactersRouter from "./charactersRoutes";
+import CharactersRouter from "./charactersRouter";
 
 export class AppRouter {
   constructor() {}

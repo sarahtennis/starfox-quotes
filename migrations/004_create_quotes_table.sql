@@ -1,4 +1,4 @@
 CREATE TABLE IF NOT EXISTS quotes (
     id SERIAL PRIMARY KEY,
-    content TEXT NOT NULL
+    content TEXT NOT NULL UNIQUE
 );
