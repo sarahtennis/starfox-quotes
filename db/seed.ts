@@ -32,7 +32,7 @@ async function main() {
   const dirsPath = __dirname + "/" + CHARACTERS_DIR_PATH;
   const characterDirs = fs.readdirSync(path.resolve(dirsPath));
 
-  let insertArr: InsertValues[] = [];
+  const insertArr: InsertValues[] = [];
   characterDirs.forEach(dir => {
     const dirPath = dirsPath + '/' + dir;
     const files = fs.readdirSync(path.resolve(dirPath));
